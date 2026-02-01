@@ -2,8 +2,8 @@
   "gateway": {
     "mode": "local",
     "bind": "lan",
-    "dashboard": {
-      "autoApprove": true
+    "controlUi": {
+      "allowInsecureAuth": true
     }
   },
 
