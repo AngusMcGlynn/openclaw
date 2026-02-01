@@ -5,6 +5,7 @@ set -e
 if [ -n "$OPENCLAW_STATE_DIR" ]; then
   CONFIG_FILE="$OPENCLAW_STATE_DIR/openclaw.json"
   WORKSPACE_DIR="$OPENCLAW_STATE_DIR/workspace"
+  CONFIG_COPIED=""
 
   # Create workspace directory if it doesn't exist
   mkdir -p "$WORKSPACE_DIR"
@@ -15,9 +16,11 @@ if [ -n "$OPENCLAW_STATE_DIR" ]; then
     if [ -f "/app/config/openclaw.json" ]; then
       cp /app/config/openclaw.json "$CONFIG_FILE"
       echo "Copied bundled config to $CONFIG_FILE"
+      CONFIG_COPIED="1"
     else
       echo '{"gateway":{"mode":"local","bind":"lan"}}' > "$CONFIG_FILE"
       echo "Created minimal config at $CONFIG_FILE"
+      CONFIG_COPIED="1"
     fi
   else
     echo "Using existing config at $CONFIG_FILE"
@@ -36,9 +39,11 @@ if [ -n "$OPENCLAW_STATE_DIR" ]; then
     done
   fi
 
-  # Run doctor --fix to apply any pending changes
-  echo "Running openclaw doctor --fix..."
-  node /app/dist/index.js doctor --fix --yes || echo "Doctor completed (may have warnings)"
+  # Only run doctor --fix when config was freshly copied
+  if [ "$CONFIG_COPIED" = "1" ]; then
+    echo "Running openclaw doctor --fix for fresh config..."
+    node /app/dist/index.js doctor --fix --yes || echo "Doctor completed (may have warnings)"
+  fi
 fi
 
 # Run the main command

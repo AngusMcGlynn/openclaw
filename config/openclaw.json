@@ -1,7 +1,10 @@
 {
   "gateway": {
     "mode": "local",
-    "bind": "lan"
+    "bind": "lan",
+    "dashboard": {
+      "autoApprove": true
+    }
   },
 
   "agents": {
@@ -49,7 +52,7 @@
     "web": {
       "search": {
         "enabled": true,
-        "provider": "brave"
+        "provider": "perplexity"
       },
       "fetch": {
         "enabled": true
