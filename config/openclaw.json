@@ -4,14 +4,6 @@
     "bind": "lan"
   },
 
-  "models": {
-    "providers": {
-      "anthropic": {
-        "apiKey": "${ANTHROPIC_API_KEY}"
-      }
-    }
-  },
-
   "agents": {
     "defaults": {
       "workspace": "/data/workspace",
@@ -23,8 +15,7 @@
       "thinkingDefault": "high",
 
       "memorySearch": {
-        "enabled": true,
-        "provider": "auto"
+        "enabled": true
       },
 
       "contextTokens": 200000,
@@ -61,8 +52,7 @@
         "provider": "brave"
       },
       "fetch": {
-        "enabled": true,
-        "readability": true
+        "enabled": true
       }
     },
     "exec": {
