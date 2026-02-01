@@ -35,11 +35,6 @@ ENV NODE_ENV=production
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Security hardening: Run as non-root user
-# The node:22-bookworm image includes a 'node' user (uid 1000)
-# This reduces the attack surface by preventing container escape via root privileges
-USER node
-
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Start the gateway server
