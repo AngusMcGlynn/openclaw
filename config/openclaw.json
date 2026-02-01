@@ -1,0 +1,71 @@
+{
+  "gateway": {
+    "mode": "local",
+    "bind": "lan"
+  },
+
+  "agents": {
+    "defaults": {
+      "workspace": "/data/workspace",
+
+      "model": {
+        "primary": "anthropic/claude-opus-4-5",
+        "fallbacks": ["anthropic/claude-sonnet-4-5"]
+      },
+      "thinkingDefault": "high",
+
+      "memorySearch": {
+        "enabled": true,
+        "provider": "auto"
+      },
+
+      "contextTokens": 200000,
+
+      "compaction": {
+        "memoryFlush": {
+          "enabled": true
+        }
+      },
+
+      "heartbeat": {
+        "every": "24h",
+        "activeHours": { "start": "09:00", "end": "21:00" },
+        "prompt": "Check in with a brief summary of anything relevant. If nothing needs attention, reply HEARTBEAT_OK.",
+        "target": "last"
+      }
+    },
+
+    "list": [{
+      "id": "main",
+      "default": true,
+      "identity": {
+        "name": "Carl",
+        "emoji": "🎯"
+      }
+    }]
+  },
+
+  "tools": {
+    "profile": "full",
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "brave"
+      },
+      "fetch": {
+        "enabled": true,
+        "readability": true
+      }
+    },
+    "exec": {
+      "security": "allowlist"
+    }
+  },
+
+  "channels": {
+    "discord": {
+      "enabled": true,
+      "tools": "allow"
+    }
+  }
+}
