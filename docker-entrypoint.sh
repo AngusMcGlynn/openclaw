@@ -35,6 +35,10 @@ if [ -n "$OPENCLAW_STATE_DIR" ]; then
       fi
     done
   fi
+
+  # Run doctor --fix to apply any pending changes
+  echo "Running openclaw doctor --fix..."
+  node /app/dist/index.js doctor --fix --yes || echo "Doctor completed (may have warnings)"
 fi
 
 # Run the main command
