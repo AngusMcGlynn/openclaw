@@ -65,7 +65,11 @@
   "channels": {
     "discord": {
       "enabled": true,
-      "tools": "allow"
+      "dm": {
+        "enabled": true,
+        "policy": "open",
+        "allowFrom": ["*"]
+      }
     }
   }
 }
