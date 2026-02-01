@@ -41,4 +41,5 @@ USER node
 # - Binds to 0.0.0.0 (lan) for external access
 # - allow-unconfigured: no config file needed in container
 # - Auth is handled via OPENCLAW_GATEWAY_TOKEN env var
+# v2: force cache bust
 CMD ["node", "dist/index.js", "gateway", "run", "--bind", "lan", "--allow-unconfigured"]
