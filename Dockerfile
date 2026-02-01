@@ -31,15 +31,19 @@ RUN pnpm ui:build
 
 ENV NODE_ENV=production
 
+# Copy and prepare entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Security hardening: Run as non-root user
 # The node:22-bookworm image includes a 'node' user (uid 1000)
 # This reduces the attack surface by preventing container escape via root privileges
 USER node
 
+ENTRYPOINT ["docker-entrypoint.sh"]
+
 # Start the gateway server
 # - Uses PORT env var (Railway sets this automatically)
 # - Binds to 0.0.0.0 (lan) for external access
-# - allow-unconfigured: no config file needed in container
 # - Auth is handled via OPENCLAW_GATEWAY_TOKEN env var
-# v2: force cache bust
-CMD ["node", "dist/index.js", "gateway", "run", "--bind", "lan", "--allow-unconfigured"]
+CMD ["node", "dist/index.js", "gateway", "run", "--bind", "lan"]
