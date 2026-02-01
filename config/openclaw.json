@@ -4,6 +4,14 @@
     "bind": "lan"
   },
 
+  "models": {
+    "providers": {
+      "anthropic": {
+        "apiKey": "${ANTHROPIC_API_KEY}"
+      }
+    }
+  },
+
   "agents": {
     "defaults": {
       "workspace": "/data/workspace",
@@ -69,6 +77,12 @@
         "enabled": true,
         "policy": "open",
         "allowFrom": ["*"]
+      },
+      "groupPolicy": "open",
+      "guilds": {
+        "*": {
+          "channels": { "*": { "allow": true, "requireMention": false } }
+        }
       }
     }
   }
