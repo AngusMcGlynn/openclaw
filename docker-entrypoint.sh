@@ -10,8 +10,8 @@ if [ -n "$OPENCLAW_STATE_DIR" ]; then
   mkdir -p "$WORKSPACE_DIR"
   mkdir -p "$WORKSPACE_DIR/memory"
 
-  # Copy bundled config if no config exists
-  if [ ! -f "$CONFIG_FILE" ]; then
+  # Copy bundled config if no config exists or if force refresh is set
+  if [ ! -f "$CONFIG_FILE" ] || [ "$OPENCLAW_FORCE_CONFIG_REFRESH" = "1" ]; then
     if [ -f "/app/config/openclaw.json" ]; then
       cp /app/config/openclaw.json "$CONFIG_FILE"
       echo "Copied bundled config to $CONFIG_FILE"

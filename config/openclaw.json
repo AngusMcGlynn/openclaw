@@ -80,7 +80,7 @@
       },
       "groupPolicy": "open",
       "guilds": {
-        "*": {
+        "1467367419738587355": {
           "channels": { "*": { "allow": true, "requireMention": false } }
         }
       }
