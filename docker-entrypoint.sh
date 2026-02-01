@@ -39,6 +39,20 @@ if [ -n "$OPENCLAW_STATE_DIR" ]; then
     done
   fi
 
+  # Copy bundled skills if they don't exist or force refresh
+  if [ -d "/app/config/workspace/skills" ]; then
+    mkdir -p "$WORKSPACE_DIR/skills"
+    for skill_dir in /app/config/workspace/skills/*/; do
+      if [ -d "$skill_dir" ]; then
+        skill_name=$(basename "$skill_dir")
+        if [ ! -d "$WORKSPACE_DIR/skills/$skill_name" ] || [ "$OPENCLAW_FORCE_CONFIG_REFRESH" = "1" ]; then
+          cp -r "$skill_dir" "$WORKSPACE_DIR/skills/"
+          echo "Copied skill $skill_name to workspace"
+        fi
+      fi
+    done
+  fi
+
   # Only run doctor --fix when config was freshly copied
   if [ "$CONFIG_COPIED" = "1" ]; then
     echo "Running openclaw doctor --fix for fresh config..."
